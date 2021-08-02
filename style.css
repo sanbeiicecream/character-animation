@@ -9,3 +9,8 @@ body{
 #myCanvas{
 	padding-right: 8px;
 }
+.container{
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}

@@ -13,15 +13,15 @@ function init() {
   if (myVideo.paused){
     return
   }
-  let cv = document.querySelector('#myCanvas')
-  let ctx = cv.getContext('2d')
+  let canvas = document.querySelector('#myCanvas')
+  let canvasContext = canvas.getContext('2d')
   //图片的高宽度给canvas画布
-  cv.width = videoWidth
-  cv.height = videoHeight
-  ctx.drawImage(myVideo, 0, 0, videoWidth, videoHeight)//画出图像
-  let imageData = ctx.getImageData(0, 0, videoWidth, videoHeight).data//获取图片的data
-  ctx.clearRect(0, 0, videoWidth, videoHeight)
-  cv.font = '9px'
+  canvas.width = videoWidth
+  canvas.height = videoHeight
+  canvasContext.drawImage(myVideo, 0, 0, videoWidth, videoHeight)//画出图像
+  let imageData = canvasContext.getImageData(0, 0, videoWidth, videoHeight).data//获取图片的data
+  canvasContext.clearRect(0, 0, videoWidth, videoHeight)
+  canvas.font = '9px'
   // 灰阶
   for (let h = 0; h < videoHeight; h += 10) {
     for (let w = 0; w < videoWidth; w += 10) {
@@ -30,7 +30,7 @@ function init() {
       let g = imageData[index + 1]
       let b = imageData[index + 2]
       let gray = getGray(r, g, b)
-      ctx.fillText(toText(gray), w, h)
+      canvasContext.fillText(toText(gray), w, h)
     }
   }
 }

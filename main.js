@@ -1,9 +1,19 @@
 const myVideo = document.querySelector('#myVideo')
-let videoHeight
-let videoWidth
+// 修改video显示的大小
+let canvasHeight
+let canvasWidth
+let styleInit = false
 myVideo.oncanplay = function (){
-  videoHeight = myVideo.clientHeight
-  videoWidth = myVideo.clientWidth
+  if (!styleInit){
+    // 显示初始化
+    canvasHeight = myVideo.clientHeight
+    canvasWidth = myVideo.clientWidth
+    myVideo.height = canvasHeight * 0.8
+    myVideo.width = canvasWidth * 0.8
+    canvasHeight = myVideo.clientHeight * 2
+    canvasWidth = myVideo.clientWidth * 2
+  }
+  styleInit = true
 }
 myVideo.ontimeupdate = function () {
   init()
@@ -16,16 +26,16 @@ function init() {
   let canvas = document.querySelector('#myCanvas')
   let canvasContext = canvas.getContext('2d')
   //图片的高宽度给canvas画布
-  canvas.width = videoWidth
-  canvas.height = videoHeight
-  canvasContext.drawImage(myVideo, 0, 0, videoWidth, videoHeight)//画出图像
-  let imageData = canvasContext.getImageData(0, 0, videoWidth, videoHeight).data//获取图片的data
-  canvasContext.clearRect(0, 0, videoWidth, videoHeight)
-  canvas.font = '9px'
+  canvas.width = canvasWidth
+  canvas.height = canvasHeight
+  canvasContext.drawImage(myVideo, 0, 0, canvasWidth, canvasHeight)//画出图像
+  let imageData = canvasContext.getImageData(0, 0, canvasWidth, canvasHeight).data//获取图片的data
+  canvasContext.clearRect(0, 0, canvasWidth, canvasHeight)
+  // canvas.font = '9px'
   // 灰阶
-  for (let h = 0; h < videoHeight; h += 10) {
-    for (let w = 0; w < videoWidth; w += 10) {
-      let index = (w + h * videoWidth) * 4
+  for (let h = 0; h < canvasHeight; h += 10) {
+    for (let w = 0; w < canvasWidth; w += 10) {
+      let index = (w + h * canvasWidth) * 4
       let r = imageData[index]
       let g = imageData[index + 1]
       let b = imageData[index + 2]

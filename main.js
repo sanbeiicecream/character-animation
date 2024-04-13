@@ -3,13 +3,10 @@ const myVideo = document.querySelector('#myVideo')
 let canvasHeight
 let canvasWidth
 let styleInit = false
-myVideo.oncanplay = function (){
-  if (!styleInit){
+myVideo.oncanplay = function () {
+  if (!styleInit) {
     // 显示初始化
-    canvasHeight = myVideo.clientHeight
-    canvasWidth = myVideo.clientWidth
-    myVideo.height = canvasHeight * 0.8
-    myVideo.width = canvasWidth * 0.8
+    myVideo.width = window.innerWidth / 4
     canvasHeight = myVideo.clientHeight * 2
     canvasWidth = myVideo.clientWidth * 2
   }
@@ -20,7 +17,7 @@ myVideo.ontimeupdate = function () {
 }
 //转换填充字符
 function init() {
-  if (myVideo.paused){
+  if (myVideo.paused) {
     return
   }
   let canvas = document.querySelector('#myCanvas')
